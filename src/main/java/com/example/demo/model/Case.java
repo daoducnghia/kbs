@@ -16,9 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+<<<<<<< HEAD
 @Table(name = "caseT")
 public class Case implements Serializable {
 
+=======
+@Table(name = "case1")
+public class Case {
+>>>>>>> 90993b3d59b2cd3b4256c21b0ac48ad375b018a0
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
