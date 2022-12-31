@@ -23,7 +23,7 @@ public class ThamSo  implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="id_case")
-    private Case case1;
+    private Case caseT;
     
     @ManyToOne
     @JoinColumn(name="id_trieuchungBenh")
