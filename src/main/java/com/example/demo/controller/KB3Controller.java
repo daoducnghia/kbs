@@ -1,13 +1,14 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.BenhInterface;
@@ -19,6 +20,7 @@ import com.example.demo.model.CachDung;
 import com.example.demo.model.LieuDung;
 import com.example.demo.model.Thuoc;
 
+@CrossOrigin
 @RestController
 public class KB3Controller {
 
@@ -36,13 +38,13 @@ public class KB3Controller {
 
     @GetMapping("/get-all-benh")
     public List<Benh> getAllBenh() {
-        List<String> listBenh = new ArrayList<>();
+        // List<String> listBenh = new ArrayList<>();
 
         try {
             List<Benh> list = (List<Benh>) benhInterface.findAll();
 
             // for (Benh i : list) {
-            //     listBenh.add(i.getName());
+            // listBenh.add(i.getName());
             // }
             return list;
         } catch (Exception e) {
@@ -53,13 +55,13 @@ public class KB3Controller {
 
     @PostMapping("/get-all-thuoc")
     public List<Thuoc> getAllThuocByBenh(@RequestBody Benh benh) {
-        List<String> listThuoc = new ArrayList<>();
+        // List<String> listThuoc = new ArrayList<>();
 
         try {
             List<Thuoc> list = (List<Thuoc>) thuocInterface.getByNameBenh(benh.getName());
 
             // for (Thuoc i : list) {
-            //     listThuoc.add(i.getThuoc());
+            // listThuoc.add(i.getThuoc());
             // }
             return list;
         } catch (Exception e) {
@@ -75,7 +77,7 @@ public class KB3Controller {
             // System.out.println(thuocInterface.getCachDungByThuoc(tt.getId_thuoc()));
             tt.setCd(cachDungInterface.getCachDungByThuoc(tt.getId_thuoc()));
             tt.setLd(lieuDungInterface.getLieuDungByTuoi(tt.getId_thuoc(), tt.getTuoi()));
-            
+
             return tt;
         } catch (Exception e) {
             System.out.println(e);
@@ -133,5 +135,5 @@ class ThongTin {
     public void setCd(CachDung cd) {
         this.cd = cd;
     }
-    
+
 };
