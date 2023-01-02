@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,13 @@ import com.example.demo.model.Benh;
 import com.example.demo.model.CachDieuTri;
 import com.example.demo.model.CauHoi_NguyenNhan;
 import com.example.demo.model.NguyenNhan;
+import java.util.ArrayList;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin
 @RestController
 public class KB2Controller {
+
     @Autowired
     BenhInterface benhInterface;
 
@@ -48,7 +51,7 @@ public class KB2Controller {
     public List<CauHoi_NguyenNhan> getCauhoiByBenh(@RequestParam int id_benh) {
         try {
             List<CauHoi_NguyenNhan> list = (List<CauHoi_NguyenNhan>) cauhoiNguyennhanInterface
-                    .getCHByBenh(id_benh);
+                            .getCHByBenh(id_benh);
 
             return list;
         } catch (Exception e) {
@@ -57,11 +60,37 @@ public class KB2Controller {
         return null;
     }
 
-    @PostMapping("/get-cach-dieu-tri")
-    public KetQua getCachDieuTri(@RequestBody KetQua kq) {
+//    @PostMapping("/get-cach-dieu-tri")
+//    public KetQua getCachDieuTri(@RequestBody KetQua kq) {
+//        try {
+//            kq.setCachDieuTri(cachDieuTrinterface.getCachDieuTriByNN(kq.getNguyenNhan().getId()));
+//            return kq;
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//        }
+//        return null;
+//    }
+    @PostMapping("/cach-dieu-tri")
+    public List<CachDieuTri> getCachDieuTri(@RequestBody List<Integer> listIDNguyenNhan){
         try {
-            kq.setCachDieuTri(cachDieuTrinterface.getCachDieuTriByNN(kq.getNguyenNhan().getId()));
-            return kq;
+            List<CachDieuTri> listCachDieuTri = new ArrayList<>();
+            for(int i : listIDNguyenNhan){
+                listCachDieuTri.add(cachDieuTrinterface.getCachDieuTriByNN(i));
+            }
+            return listCachDieuTri;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    @PostMapping("/get-cauhoi-po")
+    public List<CauHoi_NguyenNhan> getCauhoiByBenhPo(@RequestBody Benh benh) {
+        try {
+            List<CauHoi_NguyenNhan> list = (List<CauHoi_NguyenNhan>) cauhoiNguyennhanInterface
+                            .getCHByBenh(benh.getId());
+
+            return list;
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -70,6 +99,7 @@ public class KB2Controller {
 };
 
 class KetQua {
+
     private NguyenNhan nguyenNhan;
     private CachDieuTri cachDieuTri;
 
