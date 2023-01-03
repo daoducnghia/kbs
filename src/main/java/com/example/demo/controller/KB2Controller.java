@@ -56,7 +56,7 @@ public class KB2Controller {
     public List<CauHoi_NguyenNhan> getCauhoiByBenh(@RequestParam int id_benh) {
         try {
             List<CauHoi_NguyenNhan> list = (List<CauHoi_NguyenNhan>) cauhoiNguyennhanInterface
-                            .getCHByBenh(id_benh);
+                    .getCHByBenh(id_benh);
 
             return list;
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class KB2Controller {
     public List<CauHoi_NguyenNhan> getCauhoiByBenhPo(@RequestBody Benh benh) {
         try {
             List<CauHoi_NguyenNhan> list = (List<CauHoi_NguyenNhan>) cauhoiNguyennhanInterface
-                            .getCHByBenh(benh.getId());
+                    .getCHByBenh(benh.getId());
 
             return list;
         } catch (Exception e) {
@@ -102,6 +102,19 @@ public class KB2Controller {
             return listCachDieuTri;
         } catch (Exception e) {
             System.out.println(e);
+        }
+        return null;
+    }
+
+    @PostMapping("/get-all-cach-dieu-tri")
+    public List<CachDieuTri> getAllCachDieuTri(@RequestBody Benh benh) {
+        try {
+            List<CachDieuTri> list = new ArrayList<>();
+            list = cachDieuTrinterface.findAllCDTByBenh(benh.getName());
+
+            return list;
+        } catch (Exception e) {
+            // TODO: handle exception
         }
         return null;
     }
