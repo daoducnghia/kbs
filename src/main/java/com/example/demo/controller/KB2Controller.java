@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,13 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dao.BenhInterface;
 import com.example.demo.dao.CachDieuTrinterface;
 import com.example.demo.dao.CauhoiNguyennhanInterface;
+import com.example.demo.dao.NguyenNhanInterface;
 import com.example.demo.dao.ThuocInterface;
 import com.example.demo.model.Benh;
 import com.example.demo.model.CachDieuTri;
 import com.example.demo.model.CauHoi_NguyenNhan;
 import com.example.demo.model.NguyenNhan;
-import java.util.ArrayList;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin
 @RestController
@@ -26,6 +28,9 @@ public class KB2Controller {
 
     @Autowired
     BenhInterface benhInterface;
+
+    @Autowired
+    NguyenNhanInterface nguyenNhanInterface;
 
     @Autowired
     ThuocInterface thuocInterface;
@@ -55,30 +60,6 @@ public class KB2Controller {
 
             return list;
         } catch (Exception e) {
-            // TODO: handle exception
-        }
-        return null;
-    }
-
-//    @PostMapping("/get-cach-dieu-tri")
-//    public KetQua getCachDieuTri(@RequestBody KetQua kq) {
-//        try {
-//            kq.setCachDieuTri(cachDieuTrinterface.getCachDieuTriByNN(kq.getNguyenNhan().getId()));
-//            return kq;
-//        } catch (Exception e) {
-//            // TODO: handle exception
-//        }
-//        return null;
-//    }
-    @PostMapping("/cach-dieu-tri")
-    public List<CachDieuTri> getCachDieuTri(@RequestBody List<Integer> listIDNguyenNhan){
-        try {
-            List<CachDieuTri> listCachDieuTri = new ArrayList<>();
-            for(int i : listIDNguyenNhan){
-                listCachDieuTri.add(cachDieuTrinterface.getCachDieuTriByNN(i));
-            }
-            return listCachDieuTri;
-        } catch (Exception e) {
             System.out.println(e);
         }
         return null;
@@ -92,39 +73,36 @@ public class KB2Controller {
 
             return list;
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println(e);
         }
         return null;
     }
-};
 
-class KetQua {
-
-    private NguyenNhan nguyenNhan;
-    private CachDieuTri cachDieuTri;
-
-    public KetQua() {
+    @PostMapping("/get-nguyen-nhan")
+    public List<NguyenNhan> getNguyenNhan(@RequestBody List<Integer> listNN) {
+        try {
+            List<NguyenNhan> listNguyenNhan = new ArrayList<>();
+            for (int i : listNN) {
+                listNguyenNhan.add(nguyenNhanInterface.findById(i).get());
+            }
+            return listNguyenNhan;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
-    public KetQua(NguyenNhan nguyenNhan, CachDieuTri cachDieuTri) {
-        this.nguyenNhan = nguyenNhan;
-        this.cachDieuTri = cachDieuTri;
+    @PostMapping("/cach-dieu-tri")
+    public List<CachDieuTri> getCachDieuTri(@RequestBody List<Integer> listIDNguyenNhan) {
+        try {
+            List<CachDieuTri> listCachDieuTri = new ArrayList<>();
+            for (int i : listIDNguyenNhan) {
+                listCachDieuTri.add(cachDieuTrinterface.getCachDieuTriByNN(i));
+            }
+            return listCachDieuTri;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
-
-    public NguyenNhan getNguyenNhan() {
-        return nguyenNhan;
-    }
-
-    public void setNguyenNhan(NguyenNhan nguyenNhan) {
-        this.nguyenNhan = nguyenNhan;
-    }
-
-    public CachDieuTri getCachDieuTri() {
-        return cachDieuTri;
-    }
-
-    public void setCachDieuTri(CachDieuTri cachDieuTri) {
-        this.cachDieuTri = cachDieuTri;
-    }
-
 };

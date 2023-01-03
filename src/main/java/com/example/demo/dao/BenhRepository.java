@@ -15,5 +15,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface BenhRepository extends JpaRepository<Benh, Integer>{
-    
+    public Benh findByName(String name);
 }

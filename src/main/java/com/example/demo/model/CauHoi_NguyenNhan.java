@@ -17,19 +17,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class CauHoi_NguyenNhan  implements Serializable{
+public class CauHoi_NguyenNhan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column(columnDefinition = "TEXT")
     private String cauhoi;
-    
+
+    @Column(columnDefinition = "TEXT")
+    private String answer;
+
     @ManyToOne
-    @JoinColumn(name="id_benh")
+    @JoinColumn(name = "id_benh")
     private Benh benh;
-    
+
     @ManyToOne
-    @JoinColumn(name="id_nguyennhan")
+    @JoinColumn(name = "id_nguyennhan")
     private NguyenNhan nguyennhan;
 }

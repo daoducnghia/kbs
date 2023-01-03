@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class Api {
+public class KB1Controller {
 
     @Autowired
     ThamSoRepository thamSoRepository;
@@ -48,6 +48,17 @@ public class Api {
     TrieuChung_BenhRepository trieuChung_BenhRepository;
     @Autowired
     DoPhoBienRepository doPhoBienRepository;
+    
+    @PostMapping("/get-benh-by-name")
+    public Benh getBenhByName(@RequestBody Benh benh){
+        try {
+            benh = benhRepository.findByName(benh.getName());
+            return benh;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     @PostMapping("/cbr-benh")
     public Res chuanDoanBenhCBR(@RequestBody List<String> listTrieuChung) {

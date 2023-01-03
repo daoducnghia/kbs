@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,6 @@ import com.example.demo.model.Benh;
 import com.example.demo.model.CachDung;
 import com.example.demo.model.LieuDung;
 import com.example.demo.model.Thuoc;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin
 @RestController
@@ -37,34 +36,22 @@ public class KB3Controller {
 
     @GetMapping("/get-all-benh")
     public List<Benh> getAllBenh() {
-        List<String> listBenh = new ArrayList<>();
-
         try {
             List<Benh> list = (List<Benh>) benhInterface.findAll();
-
-            // for (Benh i : list) {
-            //     listBenh.add(i.getName());
-            // }
             return list;
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println(e);
         }
         return null;
     }
 
     @PostMapping("/get-all-thuoc")
     public List<Thuoc> getAllThuocByBenh(@RequestBody Benh benh) {
-        List<String> listThuoc = new ArrayList<>();
-
         try {
             List<Thuoc> list = (List<Thuoc>) thuocInterface.getByNameBenh(benh.getName());
-
-            // for (Thuoc i : list) {
-            //     listThuoc.add(i.getThuoc());
-            // }
             return list;
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println(e);
         }
 
         return null;
@@ -73,10 +60,9 @@ public class KB3Controller {
     @PostMapping("/get-ld-cd")
     public ThongTin getLdCdByThuoc(@RequestBody ThongTin tt) {
         try {
-            // System.out.println(thuocInterface.getCachDungByThuoc(tt.getId_thuoc()));
             tt.setCd(cachDungInterface.getCachDungByThuoc(tt.getId_thuoc()));
             tt.setLd(lieuDungInterface.getLieuDungByTuoi(tt.getId_thuoc(), tt.getTuoi()));
-            
+
             return tt;
         } catch (Exception e) {
             System.out.println(e);
@@ -87,7 +73,7 @@ public class KB3Controller {
 }
 
 class ThongTin {
-    // id thuoc, tuoi
+
     private int tuoi;
     private int id_thuoc;
     private LieuDung ld;
@@ -134,5 +120,5 @@ class ThongTin {
     public void setCd(CachDung cd) {
         this.cd = cd;
     }
-    
+
 };
