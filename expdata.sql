@@ -693,3 +693,21 @@ INSERT INTO kbs.trieu_chung_benh(id, count, id_benh, id_dophobien, id_trieuchung
 (73, 0, 6, 2, 56),
 (74, 0, 6, 3, 16),
 (75, 0, 6, 3, 57);
+
+UPDATE `kbs`.`cach_dieu_tri_nguyen_nhan` SET `id_cachdieutri` = '34' WHERE (`id` = '36');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '77');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '59');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '60');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '62');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '63');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '69');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '71');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '72');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '73');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '76');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '51');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '52');
+DELETE FROM `kbs`.`cach_dieu_tri_benh` WHERE (`id` = '53');
+UPDATE `kbs`.`cau_hoi_nguyen_nhan` SET `answer` = 'yes' WHERE (`id` = '9');
+UPDATE `kbs`.`cau_hoi_nguyen_nhan` SET `cauhoi` = 'Bạn có đang mắc bệnh Hội chứng ruột kích thích không?' WHERE (`id` = '11');
+UPDATE `kbs`.`cau_hoi_nguyen_nhan` SET `cauhoi` = 'Bạn có đang bị nồng độ Cholesterol trong máu cao không?' WHERE (`id` = '38');
